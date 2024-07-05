@@ -19,7 +19,7 @@ class Reports(Base):
 
 
 class Users(Base):
-    __tablename__ = 'transactions'
+    __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)

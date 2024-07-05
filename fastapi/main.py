@@ -1,18 +1,25 @@
-from fastapi import FastAPI, HTTPException, Depends
-from typing import Annotated, List
+from fastapi import FastAPI, HTTPException, Depends, UploadFile, File
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
+from typing import List
 from database import SessionLocal, engine
 import models
 from fastapi.middleware.cors import CORSMiddleware
-from database import engine
+import os
+import boto3
+from dotenv import load_dotenv
 
+load_dotenv()
 
 app = FastAPI()
 
+s3 = boto3.client('s3',
+                  aws_access_key_id=os.getenv("AWS_ACCESS_KEY"),
+                  aws_secret_access_key=os.getenv("AWS_SECRET_KEY"))
+
 @app.get('/')
 async def check():
-    return 'hello'
+    return os.getenv("S3_BUCKET_NAME")
 
 origins = [
     "http://localhost:3000"
@@ -26,23 +33,30 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-
 class ReportBase(BaseModel):
-    name : str
-    category : str
-    time : str
-    place : str
-    date : str
-    video : str
-    violator : str
-    is_done : bool
+    name: str
+    category: str
+    time: str
+    place: str
+    date: str
+    video: str
+    violator: str
+    is_done: bool
 
 class ReportModel(ReportBase):
     id: int
-    
-    # class Config:
-    #     orm_mode = True
-    
+
+class UserBase(BaseModel):
+    name: str
+    role: str
+    warnings: int
+    is_admin: bool
+    on_object: bool
+    location: str
+    picture: str
+
+class UserModel(UserBase):
+    id: int
 
 def get_db():
     db = SessionLocal()
@@ -51,38 +65,56 @@ def get_db():
     finally:
         db.close()
 
-
-db_dependency = Annotated[Session, Depends(get_db)]
-
 models.Base.metadata.create_all(bind=engine)
 
-
 @app.post("/reports/", response_model=ReportModel)
-async def create_report(report: ReportBase, db: db_dependency):
-    print('he')
-    db_report = models.Report(**report.model_dump())
+async def create_report(report: ReportBase, db: Session = Depends(get_db)):
+    db_report = models.Reports(**report.dict())
     db.add(db_report)
     db.commit()
     db.refresh(db_report)
     return db_report
 
-
 @app.get("/reports/", response_model=List[ReportModel])
-async def read_reports(db: db_dependency, skip: int=0, limit: int=100):
-    reports = db.query(models.Report).offset(skip).limit(limit).all()
+async def read_reports(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    reports = db.query(models.Reports).offset(skip).limit(limit).all()
     return reports
 
+@app.post("/users/", response_model=UserModel)
+async def create_user(user: UserBase, db: Session = Depends(get_db)):
+    db_user = models.Users(**user.dict())
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
 
+@app.get("/users/", response_model=List[UserModel])
+async def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    users = db.query(models.Users).offset(skip).limit(limit).all()
+    return users
 
+@app.get("/getallfiles")
+async def get_all_files():
+    try:
+        res = s3.list_objects_v2(Bucket=os.getenv("S3_BUCKET_NAME"))
+        return res
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        raise HTTPException(status_code=500, detail=f"Error occurred: {e}")
 
+@app.post("/upload")
+async def upload(file: UploadFile = File(...)):
+    try:
+        if file:
+            bucket_name = os.getenv("S3_BUCKET_NAME")
+            if not bucket_name:
+                raise ValueError("Bucket name is not set")
 
-
-
-
-
-
-
-
-
-
-
+            print(file.filename)
+            s3.upload_fileobj(file.file, bucket_name, file.filename)
+            return {"message": "File uploaded successfully"}
+        else:
+            return {"error": "No file provided"}
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        raise HTTPException(status_code=500, detail=f"Error occurred: {e}")
