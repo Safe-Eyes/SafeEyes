@@ -157,12 +157,4 @@ async def read_reports(db: Session = Depends(get_db)):
     reports = db.query(models.Reports).filter_by(status="solved").all()
     return reports    
 
-@app.get("/getunsolvedreports")
-async def get_unsolved():
-    try:
-        res = s3.list_objects_v2(Bucket=os.getenv("S3_BUCKET_NAME"))
-        return res
-    except Exception as e:
-        print(f"Error occurred: {e}")
-        raise HTTPException(status_code=500, detail=f"Error occurred: {e}")
     
