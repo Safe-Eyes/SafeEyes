@@ -13,7 +13,7 @@ class Reports(Base):
     date = Column(String)
     video= Column(String)
     violator = Column(String)
-    is_done = Column(Boolean)
+    status = Column(String)
 
 
 

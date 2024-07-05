@@ -42,7 +42,7 @@ class ReportBase(BaseModel):
     date: str
     video: str
     violator: str
-    is_done: bool
+    status: str # 3 states new/unsolved/solved
 
 class ReportModel(ReportBase):
     id: int
@@ -140,7 +140,22 @@ async def download_file(file_name: str):
         print(f"Error occurred: {e}")
         raise HTTPException(status_code=500, detail=f"Error occurred: {e}")
     
+# get different types of reports
 
+@app.get("/newreports", response_model=List[ReportModel])
+async def read_reports(db: Session = Depends(get_db)):
+    reports = db.query(models.Reports).filter_by(status="new").all()
+    return reports
+
+@app.get("/unsolvedreports", response_model=List[ReportModel])
+async def read_reports(db: Session = Depends(get_db)):
+    reports = db.query(models.Reports).filter_by(status="unsolved").all()
+    return reports
+
+@app.get("/solvedreports", response_model=List[ReportModel])
+async def read_reports(db: Session = Depends(get_db)):
+    reports = db.query(models.Reports).filter_by(status="solved").all()
+    return reports    
 
 @app.get("/getunsolvedreports")
 async def get_unsolved():
