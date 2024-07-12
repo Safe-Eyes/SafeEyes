@@ -41,12 +41,21 @@ function App() {
         </Routes>
       </BrowserRouter>
       {showList && (
-        <div className="container-list">
-          <h1>Items List</h1>
-          <div className="list-container">
-            {items.map((item, index) => (
-              <div key={index} className="list-item">
-                {item}
+        <div className="overlay">
+          <div className="notification-container">
+            {items.map((item) => (
+              <div key={item.id} className="notification">
+                <div className="notification-content">
+                  <div className="notification-header">
+                    <h2>{item.name}</h2>
+                    <span className="notification-time">{item.time} | {item.date}</span>
+                  </div>
+                  <div className="notification-body">
+                    <p>{item.category} at {item.place}</p>
+                    <p>Violator: {item.violator}</p>
+                    <a href={item.video} target="_blank" rel="noopener noreferrer">Watch Video</a>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
