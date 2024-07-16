@@ -1,13 +1,15 @@
 from fastapi import FastAPI, HTTPException, Depends, UploadFile, File
 from sqlalchemy.orm import Session
+from sqlalchemy import and_, func
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 from database import SessionLocal, engine
 import models
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 import os
 import boto3
+from datetime import datetime, timedelta
 
 from dotenv import load_dotenv
 
@@ -22,6 +24,7 @@ s3 = boto3.client('s3',
 @app.get('/')
 async def check():
     return "hehe"
+
 origins = [
     "http://localhost:3000"
 ]
@@ -37,12 +40,12 @@ app.add_middleware(
 class ReportBase(BaseModel):
     name: str
     category: str
-    time: str
+    time: Optional[str] = None  # Making time optional
     place: str
-    date: str
+    date: str  # Assuming date is a string in 'YYYY-MM-DD' format
     video: str
     violator: str
-    status: str # 3 states new/unsolved/solved
+    status: str  # 3 states: new/unsolved/solved
 
 class ReportModel(ReportBase):
     id: int
@@ -70,11 +73,41 @@ models.Base.metadata.create_all(bind=engine)
 
 @app.post("/reports/", response_model=ReportModel)
 async def create_report(report: ReportBase, db: Session = Depends(get_db)):
-    db_report = models.Reports(**report.dict())
-    db.add(db_report)
-    db.commit()
-    db.refresh(db_report)
-    return db_report
+    try:
+        # Get current time in UTC
+        current_time = datetime.utcnow()
+        current_time_str = current_time.strftime("%H:%M:%S")
+
+        # Calculate the time window for the last minute
+        one_minute_ago = current_time - timedelta(minutes=1)
+        one_minute_ago_str = one_minute_ago.strftime("%H:%M:%S")
+
+        # Check for existing reports in the last minute with the same category and place
+        existing_report = db.query(models.Reports).filter(
+            and_(
+                models.Reports.category == report.category,
+                models.Reports.place == report.place,
+                models.Reports.status.in_(["new", "unsolved"]),
+                models.Reports.time >= one_minute_ago_str,
+                models.Reports.time <= current_time_str
+            )
+        ).first()
+
+        if existing_report:
+            raise HTTPException(status_code=400, detail="A similar report with status 'new' or 'unsolved' exists from the last minute.")
+
+        # Set the report time to the current time if not provided
+        if not report.time:
+            report.time = current_time_str
+
+        db_report = models.Reports(**report.dict())
+        db.add(db_report)
+        db.commit()
+        db.refresh(db_report)
+        return db_report
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        raise HTTPException(status_code=500, detail=f"Error occurred: {e}")
 
 @app.get("/reports/", response_model=List[ReportModel])
 async def read_reports(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
@@ -123,8 +156,6 @@ async def upload(file: UploadFile = File(...)):
         print(f"Error occurred: {e}")
         raise HTTPException(status_code=500, detail=f"Error occurred: {e}")
 
-
-
 @app.get("/download")
 async def download_file(file_name: str):
     try:
@@ -139,9 +170,8 @@ async def download_file(file_name: str):
     except Exception as e:
         print(f"Error occurred: {e}")
         raise HTTPException(status_code=500, detail=f"Error occurred: {e}")
-    
-# get different types of reports
 
+# Get different types of reports
 @app.get("/newreports", response_model=List[ReportModel])
 async def read_reports(db: Session = Depends(get_db)):
     reports = db.query(models.Reports).filter_by(status="new").all()
@@ -155,6 +185,4 @@ async def read_reports(db: Session = Depends(get_db)):
 @app.get("/solvedreports", response_model=List[ReportModel])
 async def read_reports(db: Session = Depends(get_db)):
     reports = db.query(models.Reports).filter_by(status="solved").all()
-    return reports    
-
-    
+    return reports
