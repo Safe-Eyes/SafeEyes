@@ -18,7 +18,7 @@ const App = () => {
   useEffect(() => {
     // Fetch items initially
     fetchItems();
-    
+
     // Set up interval to fetch items every second
     const interval = setInterval(() => {
       fetchItems();
@@ -35,6 +35,11 @@ const App = () => {
   const filteredItems = items.filter(item => 
     filter === "all" || item.status === filter
   );
+
+  const s3BucketName = process.env.REACT_APP_S3_BUCKET_NAME;
+
+  // Log the bucket name to verify it's being read correctly
+  console.log('S3 Bucket Name:', s3BucketName);
 
   return (
     <div className="report-section">
@@ -55,7 +60,7 @@ const App = () => {
               <div className="notification-body">
                 <p>{item.category} at {item.place}</p>
                 <p>Violator: {item.violator}</p>
-                <a href={item.video} target="_blank" rel="noopener noreferrer">Watch Video</a>
+                <a href={`https://${process.env.REACT_APP_S3_BUCKET_NAME}.s3.eu-north-1.amazonaws.com/safe/${item.video}`} target="_blank" rel="noopener noreferrer">Watch Video</a>
               </div>
             </div>
           </div>
