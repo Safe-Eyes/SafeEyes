@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import '/Users/adilzhan/Desktop/safeeyes/eyes/src/notifications.css';
 
 const App = () => {
@@ -36,11 +37,6 @@ const App = () => {
     filter === "all" || item.status === filter
   );
 
-  const s3BucketName = process.env.REACT_APP_S3_BUCKET_NAME;
-
-  // Log the bucket name to verify it's being read correctly
-  console.log('S3 Bucket Name:', s3BucketName);
-
   return (
     <div className="report-section">
       <div className="filter-buttons">
@@ -60,7 +56,7 @@ const App = () => {
               <div className="notification-body">
                 <p>{item.category} at {item.place}</p>
                 <p>Violator: {item.violator}</p>
-                <a href={`https://${process.env.REACT_APP_S3_BUCKET_NAME}.s3.eu-north-1.amazonaws.com/safe/${item.video}`} target="_blank" rel="noopener noreferrer">Watch Video</a>
+                <Link to={`/video/${encodeURIComponent(`https://${process.env.REACT_APP_S3_BUCKET_NAME}.s3.eu-north-1.amazonaws.com/safe/${item.video}`)}`} target="_blank">Watch Video</Link>
               </div>
             </div>
           </div>
