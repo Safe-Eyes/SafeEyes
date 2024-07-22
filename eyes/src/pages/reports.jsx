@@ -56,7 +56,7 @@ const App = () => {
               <div className="notification-body">
                 <p>{item.category} at {item.place}</p>
                 <p>Violator: {item.violator}</p>
-                <Link to={`/video/${encodeURIComponent(`https://${process.env.REACT_APP_S3_BUCKET_NAME}.s3.eu-north-1.amazonaws.com/safe/${item.video}`)}`} target="_blank">Watch Video</Link>
+                <Link to={`/video/${encodeURIComponent(`https://${process.env.REACT_APP_CLOUDFRONT}.cloudfront.net/safe/${item.video}`)}`} target="_blank">Watch Video</Link>
               </div>
             </div>
           </div>

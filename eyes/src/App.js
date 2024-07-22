@@ -9,7 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import axios from 'axios';
-import './App.css';
+import './App.css'; // Ensure the path is correct
 
 function App() {
   const [items, setItems] = useState([]);
@@ -42,6 +42,7 @@ function App() {
           <Route path="/about" element={<Listing />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/video/:videoUrl" element={<VideoPlayer />} />
+          <Route path="/video" element={<VideoPlayer />} />
         </Routes>
       </BrowserRouter>
       {showList && (
@@ -71,3 +72,4 @@ function App() {
 }
 
 export default App;
+
