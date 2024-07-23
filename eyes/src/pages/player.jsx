@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import '/Users/adilzhan/Desktop/safeeyes/eyes/src/notifications.css'; // Ensure the path is correct
+
 
 const VideoPlayer = () => {
   const { videoUrl } = useParams();
