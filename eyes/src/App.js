@@ -1,75 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Courses from "./pages/category";
 import Contact from "./pages/contact";
 import Listing from "./pages/listing";
 import Index from "./pages/index";
 import Reports from "./pages/reports";
 import VideoPlayer from './pages/player';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import axios from 'axios';
-import './App.css'; // Ensure the path is correct
+import './App.css';
 
 function App() {
-  const [items, setItems] = useState([]);
-  const [showList, setShowList] = useState(false);
+  const [newReportCount, setNewReportCount] = useState(0);
+  const [unsolvedReportCount, setUnsolvedReportCount] = useState(0);
 
-  const fetchItems = async () => {
+  const fetchReportCounts = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/newreports');
-      setItems(response.data);
+      const newReportsResponse = await axios.get('http://localhost:8000/newreports');
+      const unsolvedReportsResponse = await axios.get('http://localhost:8000/unsolvedreports');
+      setNewReportCount(newReportsResponse.data.length);
+      setUnsolvedReportCount(unsolvedReportsResponse.data.length);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
 
-  const handleButtonClick = () => {
-    setShowList(!showList);
-    if (!showList) {
-      fetchItems();
-    }
-  };
+  useEffect(() => {
+    fetchReportCounts();
+    const interval = setInterval(() => {
+      fetchReportCounts();
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div>
-      <Header onButtonClick={handleButtonClick} />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/courses" element={<Courses />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/about" element={<Listing />} />
-          <Route path="/reports" element={<Reports />} />
-          <Route path="/video/:videoUrl" element={<VideoPlayer />} />
-          <Route path="/video" element={<VideoPlayer />} />
-        </Routes>
-      </BrowserRouter>
-      {showList && (
-        <div className="overlay">
-          <div className="notification-container">
-            {items.map((item) => (
-              <div key={item.id} className="notification">
-                <div className="notification-content">
-                  <div className="notification-header">
-                    <h2>{item.name}</h2>
-                    <span className="notification-time">{item.time} | {item.date}</span>
-                  </div>
-                  <div className="notification-body">
-                    <p>{item.category} at {item.place}</p>
-                    <p>Violator: {item.violator}</p>
-                    <a href={item.video} target="_blank" rel="noopener noreferrer">Watch Video</a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+    <BrowserRouter>
+      <Header newReportCount={newReportCount} unsolvedReportCount={unsolvedReportCount} />
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/courses" element={<Courses />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<Listing />} />
+        <Route path="/reports" element={<Reports />} />
+        <Route path="/video/:videoUrl" element={<VideoPlayer />} />
+        <Route path="/video" element={<VideoPlayer />} />
+      </Routes>
       <Footer />
-    </div>
+    </BrowserRouter>
   );
 }
 
 export default App;
-

@@ -289,7 +289,7 @@ header
   width: 166px;
   height: 58px;
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 0px;
 }
 
 .background-header .main-nav a.logo {
@@ -300,13 +300,13 @@ header
   margin-top: 10px;
 }
 
-.background-header .main-nav .nav {
-  margin-top: 20px !important;
+.background-header .main-nav .nav{
+  margin-top: 7px !important;
 }
 
-.header-area .main-nav .nav {
+.header-area .main-nav .nav{
   float: right;
-  margin-top: 30px;
+  margin-top: 7px;
   margin-right: 0px;
   background-color: transparent;
   -webkit-transition: all 0.3s ease 0s;
@@ -2068,7 +2068,6 @@ responsive
     color: transparent;
   }
   .header-area .main-nav a.logo {
-    background-image: url(../images/black-logo.png);
     float: left;
   }
   .header-area .logo {

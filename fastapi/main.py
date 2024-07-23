@@ -203,3 +203,13 @@ async def update_report_status(report_id: int, status_update: ReportStatusUpdate
     db.commit()
     db.refresh(report)
     return report
+
+@app.delete("/reports/{report_id}")
+async def delete_report(report_id: int, db: Session = Depends(get_db)):
+    report = db.query(models.Reports).filter(models.Reports.id == report_id).first()
+    if not report:
+        raise HTTPException(status_code=404, detail="Report not found")
+    
+    db.delete(report)
+    db.commit()
+    return {"message": "Report deleted successfully"}
