@@ -62,6 +62,12 @@ class UserBase(BaseModel):
 class UserModel(UserBase):
     id: int
 
+class ReportStatusUpdate(BaseModel):
+    status: str
+
+class ReportModel(ReportBase):
+    id: int
+
 def get_db():
     db = SessionLocal()
     try:
@@ -93,7 +99,7 @@ async def create_report(report: ReportBase, db: Session = Depends(get_db)):
             )
         ).first()
 
-        if existing_report:
+        if (existing_report):
             raise HTTPException(status_code=400, detail="A similar report with status 'new' or 'unsolved' exists from the last minute.")
 
         # Set the report time to the current time if not provided
@@ -186,3 +192,14 @@ async def read_reports(db: Session = Depends(get_db)):
 async def read_reports(db: Session = Depends(get_db)):
     reports = db.query(models.Reports).filter_by(status="solved").all()
     return reports
+
+@app.patch("/reports/{report_id}/status")
+async def update_report_status(report_id: int, status_update: ReportStatusUpdate, db: Session = Depends(get_db)):
+    report = db.query(models.Reports).filter(models.Reports.id == report_id).first()
+    if not report:
+        raise HTTPException(status_code=404, detail="Report not found")
+    
+    report.status = status_update.status
+    db.commit()
+    db.refresh(report)
+    return report

@@ -32,6 +32,18 @@ const App = () => {
     setExpandedItem(expandedItem === id ? null : id);
   };
 
+  const handleChangeStatus = async (id, currentStatus) => {
+    const statusOrder = ["new", "unsolved", "solved"];
+    const nextStatus = statusOrder[(statusOrder.indexOf(currentStatus) + 1) % statusOrder.length];
+
+    try {
+      await axios.patch(`http://localhost:8000/reports/${id}/status`, { status: nextStatus });
+      fetchItems();
+    } catch (error) {
+      console.error('Error changing status:', error);
+    }
+  };
+
   const parseDateTime = (date, time) => {
     const [day, month, year] = date.split('/').map(Number);
     const [hours, minutes, seconds] = time.split(':').map(Number);
@@ -69,6 +81,9 @@ const App = () => {
               <div className="notification-body">
                 <p>{item.category} at {item.place}</p>
                 <p>Violator: {item.violator}</p>
+                <button onClick={(e) => { e.stopPropagation(); handleChangeStatus(item.id, item.status); }}>
+                  Change Status (Current: {item.status})
+                </button>
               </div>
             </div>
             {expandedItem === item.id && (
@@ -87,4 +102,3 @@ const App = () => {
 };
 
 export default App;
-
