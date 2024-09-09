@@ -17,6 +17,10 @@ load_dotenv()
 
 app = FastAPI()
 
+# Store positions in a global list
+positions = []
+polygon=[]
+
 s3 = boto3.client('s3',
                   aws_access_key_id=os.getenv("AWS_ACCESS_KEY"),
                   aws_secret_access_key=os.getenv("AWS_SECRET_KEY"))
@@ -67,6 +71,16 @@ class ReportStatusUpdate(BaseModel):
 
 class ReportModel(ReportBase):
     id: int
+
+class Position(BaseModel):
+    x: int
+    y: int
+    frame_width: int
+    frame_height: int
+
+class PolygonPoint(BaseModel):
+    x: int
+    y: int
 
 def get_db():
     db = SessionLocal()
@@ -213,3 +227,22 @@ async def delete_report(report_id: int, db: Session = Depends(get_db)):
     db.delete(report)
     db.commit()
     return {"message": "Report deleted successfully"}
+
+@app.post("/positions/")
+async def add_position(position: Position):
+    positions.append(position.dict())
+    return {"message": "Position added successfully"}
+
+@app.get("/positions/", response_model=List[dict[str, int]])
+async def get_positions():
+    return positions
+
+@app.post("/polygon/")
+async def add_polygon(polygon: List[PolygonPoint]):
+    global polygon_storage  # Declare global variable
+    polygon_storage = [point.dict() for point in polygon]
+    return {"message": "Polygon data received successfully"}
+
+@app.get("/polygon/", response_model=List[dict[str, int]])
+async def get_polygon():
+    return polygon_storage
