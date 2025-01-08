@@ -6,9 +6,12 @@ const Footer: FC = () => {
         toast.success('Спасибо. Email был успешно отправлен. Мы свяжемся с вами в течении 3-4 дней!')
     }
     return (
-        <div className="bg-gray-800 h-80 flex text-white py-6 text-center justify-evenly">
+        <div className="bg-gray-600 h-80 flex text-white py-6 text-center justify-evenly">
             <div className="flex flex-col justify-center items-start">
-                <h1 className="black font-bold text-3xl mb-20">SafeEyes</h1>
+                <div className="flex flex-col items-center">
+                    <img src="/SafeEyes/assets/logo.png" alt="" width={50} height={50}/>
+                    <h1 className="black font-bold text-3xl mb-20 mt-2">SafeEyes</h1>
+                </div>
                 <h6 className="text-white/50">© 2025 ТОО «SafeEyes». </h6>
                 <h6 className="text-white/50">Все права защищены.</h6>
             </div>
