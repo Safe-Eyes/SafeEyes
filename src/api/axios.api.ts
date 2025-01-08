@@ -4,6 +4,6 @@ import axios from "axios";
 const instance = axios.create({});
 
 const init = () => {}
-console.log(instance.arguments)
+console.log(instance)
 
 export { init }

@@ -23,12 +23,10 @@ export const router = createBrowserRouter([
                     <AboutUs />
                 ),
             }, 
-            {
-                path: "functionality",
-                element: (
-                    <HowItWorks />
-                ),
-            }
         ]
+        }
+    ],
+    {
+        basename: '/SafeEyes', 
     }
-])
+)

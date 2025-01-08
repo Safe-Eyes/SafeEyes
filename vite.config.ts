@@ -4,7 +4,7 @@ import tailwindcss from "tailwindcss"
 import autoprefixer from "autoprefixer"
 
 export default defineConfig({
-  base: "/SafeEyes/",
+  base: '/SafeEyes/',
   plugins: [
     react(),
   ],
@@ -17,4 +17,7 @@ export default defineConfig({
     port: 8080,
     strictPort: true,
    },
+  build: {
+    sourcemap: true,
+  }
 })

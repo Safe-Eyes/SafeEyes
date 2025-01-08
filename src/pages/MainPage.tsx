@@ -19,7 +19,7 @@ const Home: FC = () => {
         <div className="flex h-4/5 items-stretch justify-center align-center space-x-6 px-10 mb-10">
             <div className="flex flex-col shadow-lg h-full justify-evenly items-center whitespace-normal rounded-md px-3 py-2">
                 <div className="w-[350px] h-[350px] mb-10">
-                    <img src="src/assets/ppe.png" alt="" className="w-full h-full object-fill rounded-lg" />
+                    <img src="/SafeEyes/src/assets/ppe.png" alt="" className="w-full h-full object-fill rounded-lg" />
                 </div>
                 <h3 className="text-center mb-5">Распознование средств индивидуальной защиты</h3>
                 <h5 className="text-blue-300 text-center mb-5">
@@ -27,12 +27,12 @@ const Home: FC = () => {
                 </h5>
             </div>
             <div className="flex flex-col shadow-lg h-full justify-evenly items-center whitespace-normal rounded-md px-3 py-2">
-                <div className="w-[350px] h-[350px] mb-10"><img src="src/assets/fires.png" alt="" className="w-full h-full object-fill rounded-lg"/></div>
+                <div className="w-[350px] h-[350px] mb-10"><img src="/SafeEyes/src/assets/fires.png" alt="" className="w-full h-full object-fill rounded-lg"/></div>
                 <h3 className="text-center mb-5">Обнаружение пожаров</h3>
                 <h5 className="text-blue-300 text-center mb-5">Если вам нужно предсказать какое либо событие или составить оптимальный план</h5>
             </div>
             <div className="flex flex-col shadow-lg h-full justify-evenly items-center whitespace-normal rounded-md px-3 py-2">
-                <div className="w-[400px] h-[350px] mb-10"><img src="src/assets/performances.png" alt="" className="w-full h-full object-fill rounded-lg"/></div>
+                <div className="w-[400px] h-[350px] mb-10"><img src="/SafeEyes/src/assets/performances.png" alt="" className="w-full h-full object-fill rounded-lg"/></div>
                 <h3 className="text-center mb-5">Наблюдение за производительностью работников</h3>
                 <h5 className="text-blue-300 text-center mb-5">Если вам нужно формировать какие либо отчеты или другие документы на основании данных</h5>
             </div>
