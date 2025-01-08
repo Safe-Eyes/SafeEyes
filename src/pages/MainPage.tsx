@@ -23,13 +23,13 @@ const Home: FC = () => {
                 </div>
                 <h3 className="text-center mb-5">Распознование средств индивидуальной защиты</h3>
                 <h5 className="text-blue-300 text-center mb-5">
-                    Если вам нужно распознавать какие либо объекты с изображений или камер
+                    Автоматическое обнаружение отсутствия касок, жилетов и другой защитной экипировки
                 </h5>
             </div>
             <div className="flex flex-col shadow-lg h-full justify-evenly items-center whitespace-normal rounded-md px-3 py-2">
                 <div className="w-[350px] h-[350px] mb-10"><img src="/SafeEyes/assets/fires.png" alt="" className="w-full h-full object-fill rounded-lg"/></div>
                 <h3 className="text-center mb-5">Обнаружение пожаров</h3>
-                <h5 className="text-blue-300 text-center mb-5">Если вам нужно предсказать какое либо событие или составить оптимальный план</h5>
+                <h5 className="text-blue-300 text-center mb-5">Предупреждение о воспламенении с минимальными задержками</h5>
             </div>
             <div className="flex flex-col shadow-lg h-full justify-evenly items-center whitespace-normal rounded-md px-3 py-2">
                 <div className="w-[400px] h-[350px] mb-10"><img src="/SafeEyes/assets/performances.png" alt="" className="w-full h-full object-fill rounded-lg"/></div>

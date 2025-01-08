@@ -4,12 +4,12 @@ import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 
 const AboutUs: FC = () => {
     const staff = [
-        ["/SafeEyes/assets/Adilzhan.png", "Ахметкерей Әділжан", "CEO", "Красавчик"],
-        ["/SafeEyes/assets/Iliyas.png", "Тілеужан Ілияс", "CTO", "Красавчик"],
-        ["/SafeEyes/assets/Sara.png", "Сайранова Сара", "Не знаю", "Красавица"],
-        ["/SafeEyes/assets/rasul.png", "Абуов Расул", "Советник", "Красавчик"],
-        ["/SafeEyes/assets/Aisultan.png", "Бақтығали Айсұлтан", "COO", "Красавчик"],
-        ["/SafeEyes/assets/Aizhanq.png", "Абуова Айжан", "Не знаю", "Красавица"],
+        ["/SafeEyes/assets/Adilzhan.png", "Ахметкерей Әділжан", "CEO", "two-time Top 3 Tourism Hackathon, Three-times AITU Icode finalist"],
+        ["/SafeEyes/assets/Iliyas.png", "Тілеужан Ілияс", "CTO", "1st Place WRO 2022,  John Hopkin's CTY’23, one-time Top 3 Tourism Hackathon"],
+        ["/SafeEyes/assets/Sara.png", "Сайранова Сара", "Исследователь", "1st place International science projects competition Kurbatov, 1st place Republican science projects conference organised by KazNU"],
+        ["/SafeEyes/assets/rasul.png", "Абуов Расул", "COO", "Rise Сhallenge Finalist 2024, Exhibitor at Digital Almaty and Digital Bridge 2023"],
+        ["/SafeEyes/assets/Aisultan.png", "Бақтығали Айсұлтан", "COO", "Rise Сhallenge Finalist 2024, Exhibitor at Digital Almaty and Digital Bridge 2023"],
+        ["/SafeEyes/assets/Aizhanq.png", "Абуова Айжан", "Исследователь", "Красавица"],
         ["/SafeEyes/assets/akan.png", "Қайырбай Ақансері", "Frontend-developer", "Красавчик"],
         ["/SafeEyes/assets/Zanghar.png", "Қасенғазы Заңғар", "ML-engineer", "Красавчик"],
         ["/SafeEyes/assets/Yerdaulet.png", "Өмірзақ Ердәулет", "ML-engineer", "Красавчик"]
