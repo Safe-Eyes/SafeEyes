@@ -4,13 +4,13 @@ import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 
 const AboutUs: FC = () => {
     const staff = [
-        ["/SafeEyes/assets/Adilzhan.png", "Ахметкерей Әділжан", "CEO", "two-time Top 3 Tourism Hackathon", "Three-times AITU Icode finalist"],
-        ["/SafeEyes/assets/Iliyas.png", "Тілеужан Ілияс", "CTO", "1st Place WRO 2022,  John Hopkin's CTY’23", "one-time Top 3 Tourism Hackathon"],
-        ["/SafeEyes/assets/Sara.png", "Сайранова Сара", "Исследователь", "1st place International science projects competition Kurbatov", "1st place Republican science projects conference organised by KazNU"],
-        ["/SafeEyes/assets/rasul.png", "Абуов Расул", "COO", "Rise Сhallenge Finalist 2024", "Exhibitor at Digital Almaty and Digital Bridge 2023"],
-        ["/SafeEyes/assets/Aisultan.png", "Бақтығали Айсұлтан", "COO", "Rise Сhallenge Finalist 2024", "Exhibitor at Digital Almaty and Digital Bridge 2023"],
+        ["/SafeEyes/assets/Adilzhan.png", "Ахметкерей Әділжан", "CEO", "Двухкратный призер хакатона по туризму", "Трехкратный финалист AITU Icode"],
+        ["/SafeEyes/assets/Iliyas.png", "Тілеужан Ілияс", "CTO", "1 место на WRO 2022",  "John Hopkin's CTY’23"],
+        ["/SafeEyes/assets/Sara.png", "Сайранова Сара", "Исследователь", "1 место на Международном конкурсе научных проектов Курбатова", "1 место на Республиканской конференции научных проектов, организованной КазНУ"],
+        ["/SafeEyes/assets/rasul.png", "Абуов Расул", "COO", "Финалист Rise Challenge 2024", "Участник выставки Digital Almaty и Digital Bridge 2023"],
+        ["/SafeEyes/assets/Aisultan.png", "Бақтығали Айсұлтан", "COO", "Финалист Rise Challenge 2024", "Участник выставки Digital Almaty и Digital Bridge 2023"],
         ["/SafeEyes/assets/Aizhanq.png", "Абуова Айжан", "Исследователь", "", ""],
-        ["/SafeEyes/assets/akan.png", "Қайырбай Ақансері", "Frontend-developer", "", ""],
+        ["/SafeEyes/assets/akan.png", "Қайырбай Ақансері", "Frontend-developer", "3 место на КБО, Двухкратный финалист AITU Icode", "Окончил курс Frontend Development using React"],
         ["/SafeEyes/assets/Zanghar.png", "Қасенғазы Заңғар", "ML-engineer", "", ""],
         ["/SafeEyes/assets/Yerdaulet.png", "Өмірзақ Ердәулет", "ML-engineer", "", ""]
     ];
@@ -36,9 +36,9 @@ const AboutUs: FC = () => {
                     <div className="w-[350px] h-[350px] mb-10 rounded-full">
                         <img src={staff[index][0]} alt="" className="w-full h-full object-fill rounded-full" />
                     </div>
-                    <h3 className="text-center mb-5 font-bold">{staff[index][1]}</h3>
-                    <h5 className="text-blue-300 text-center mb-5">{staff[index][2]}</h5>    
-                    <h4 className="text-blue-300 text-center mb-5">{staff[index][3]}</h4>    
+                    <h3 className="text-center text-2xl mb-2 font-bold">{staff[index][1]}</h3>
+                    <h5 className="text-blue-300 font-bold text-center mb-2">{staff[index][2]}</h5>    
+                    <h4 className="text-blue-300 text-center mb-1">{staff[index][3]}</h4>    
                     <h4 className="text-blue-300 text-center mb-5">{staff[index][4]}</h4>    
                 </div>
                 <div onClick={increase} className="flex flex-col shadow-lg h-fit justify-center items-center whitespace-normal rounded-md px-3 py-2">

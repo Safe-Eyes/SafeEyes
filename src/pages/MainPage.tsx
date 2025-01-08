@@ -1,13 +1,19 @@
 import { FC } from "react";
 
 const Home: FC = () => {
+    const handleScrollToBottom = () => {
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: 'smooth',            
+        });
+      };
   return (
     <div className="flex flex-col">
       <div className="h-screen w-full flex items-center justify-center">
         <div className="flex flex-col">
             <h1 className="text-4xl mt-4 font-bold">Ваш надежный ИИ помощник</h1>
             <h2 className="text-2xl mt-4">Помогаем спасать жизни работников</h2>
-            <div className="w-fit mt-20 h-fit px-5 py-3 bg-blue-300 rounded-full text-white">Свяжитесь с нами</div>
+            <div onClick={handleScrollToBottom} className="w-fit mt-20 h-fit px-5 py-3 bg-blue-300 rounded-full text-white">Свяжитесь с нами</div>
         </div>
         <div>
             <img src=""/>
