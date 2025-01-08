@@ -1,6 +1,10 @@
 import { FC } from "react";
+import { toast } from "react-toastify";
 
 const Footer: FC = () => {
+    const sendEmail = () => {
+        toast.success('Спасибо. Email был успешно отправлен. Мы свяжемся с вами в течении 3-4 дней!')
+    }
     return (
         <div className="bg-gray-800 h-80 flex text-white py-6 text-center justify-evenly">
             <div className="flex flex-col justify-center items-start">
@@ -16,8 +20,8 @@ const Footer: FC = () => {
             </div>
             <div className="flex flex-col justify-center items-start">
                 <h4 className="text-white justify-start">Оставьте свой email и мы свяжемся с вами</h4>
-                <input className="w-fit rounded-md px-3 py-2 mt-4" type="text" placeholder="Ваш email:"/>
-                <div className="w-fit mt-4 h-fit px-5 py-3 bg-blue-300 rounded-full text-white">Отправить</div>
+                <input className="w-fit rounded-md px-3 py-2 mt-4 text-black" type="text" placeholder="Ваш email:"/>
+                <div className="w-fit mt-4 h-fit px-5 py-3 bg-blue-300 rounded-full text-white" onClick={sendEmail}>Отправить</div>
             </div>
         </div>
     )
