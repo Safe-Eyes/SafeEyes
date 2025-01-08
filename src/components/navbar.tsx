@@ -16,7 +16,7 @@ const NavBar: FC = () => {
     };
 
     return (
-        <header className="flex items-center p-4">
+        <header className="flex items-center p-4 mt-3 mx-5">
             <Link to="/">
                 <div className="flex flex-col ml-5 justify-center items-center">
                     <img src="/SafeEyes/assets/logo.png" alt="" width={50} height={50}/>
