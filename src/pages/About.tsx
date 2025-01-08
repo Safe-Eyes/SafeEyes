@@ -9,7 +9,7 @@ const AboutUs: FC = () => {
         ["src/assets/Sara.png", "Сайранова Сара", "Не знаю", "Красавица"],
         ["src/assets/rasul.png", "Абуов Расул", "Советник", "Красавчик"],
         ["src/assets/Aisultan.png", "Бақтығали Айсұлтан", "COO", "Красавчик"],
-        ["src/assets/Aizhan.png", "Абуова Айжан", "Не знаю", "Красавица"],
+        ["src/assets/Aizhanq.png", "Абуова Айжан", "Не знаю", "Красавица"],
         ["src/assets/akan.png", "Қайырбай Ақансері", "Frontend-developer", "Красавчик"],
         ["src/assets/Zanghar.png", "Қасенғазы Заңғар", "ML-engineer", "Красавчик"],
         ["src/assets/Yerdaulet.png", "Өмірзақ Ердәулет", "ML-engineer", "Красавчик"]
