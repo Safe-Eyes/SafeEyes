@@ -4,15 +4,15 @@ import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 
 const AboutUs: FC = () => {
     const staff = [
-        ["/SafeEyes/public/Adilzhan.png", "Ахметкерей Әділжан", "CEO", "Красавчик"],
-        ["/SafeEyes/public/Iliyas.png", "Тілеужан Ілияс", "CTO", "Красавчик"],
-        ["/SafeEyes/public/Sara.png", "Сайранова Сара", "Не знаю", "Красавица"],
-        ["/SafeEyes/public/rasul.png", "Абуов Расул", "Советник", "Красавчик"],
-        ["/SafeEyes/public/Aisultan.png", "Бақтығали Айсұлтан", "COO", "Красавчик"],
-        ["/SafeEyes/public/Aizhanq.png", "Абуова Айжан", "Не знаю", "Красавица"],
-        ["/SafeEyes/public/akan.png", "Қайырбай Ақансері", "Frontend-developer", "Красавчик"],
-        ["/SafeEyes/public/Zanghar.png", "Қасенғазы Заңғар", "ML-engineer", "Красавчик"],
-        ["/SafeEyes/public/Yerdaulet.png", "Өмірзақ Ердәулет", "ML-engineer", "Красавчик"]
+        ["/SafeEyes/assets/Adilzhan.png", "Ахметкерей Әділжан", "CEO", "Красавчик"],
+        ["/SafeEyes/assets/Iliyas.png", "Тілеужан Ілияс", "CTO", "Красавчик"],
+        ["/SafeEyes/assets/Sara.png", "Сайранова Сара", "Не знаю", "Красавица"],
+        ["/SafeEyes/assets/rasul.png", "Абуов Расул", "Советник", "Красавчик"],
+        ["/SafeEyes/assets/Aisultan.png", "Бақтығали Айсұлтан", "COO", "Красавчик"],
+        ["/SafeEyes/assets/Aizhanq.png", "Абуова Айжан", "Не знаю", "Красавица"],
+        ["/SafeEyes/assets/akan.png", "Қайырбай Ақансері", "Frontend-developer", "Красавчик"],
+        ["/SafeEyes/assets/Zanghar.png", "Қасенғазы Заңғар", "ML-engineer", "Красавчик"],
+        ["/SafeEyes/assets/Yerdaulet.png", "Өмірзақ Ердәулет", "ML-engineer", "Красавчик"]
     ];
     const [index, setIndex] = useState<number>(0);
     const increase = () => {
