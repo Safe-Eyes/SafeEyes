@@ -13,7 +13,7 @@ const Home: FC = () => {
       <div className="min-h-screen w-full flex flex-col lg:flex-row justify-evenly items-center px-10">
         <div className="flex flex-col items-center text-center lg:text-left lg:items-start">
           <h1 className="text-4xl font-bold">Ваш надежный ИИ помощник</h1>
-          <h2 className="text-2xl mt-8 lg:mt-4">Помогаем спасать жизни работников</h2>
+          <h2 className="text-2xl mt-8 lg:mt-4">Сохраняем жизни работников и заботимся об их безопасности</h2>
           <button
             onClick={handleScrollToBottom}
             className="w-fit mt-10 lg:mt-20 px-5 py-3 bg-blue-300 rounded-full text-white"
