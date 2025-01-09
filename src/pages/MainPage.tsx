@@ -16,13 +16,13 @@ const Home: FC = () => {
             <div onClick={handleScrollToBottom} className="w-fit mt-20 h-fit px-5 py-3 bg-blue-300 rounded-full text-white">Свяжитесь с нами</div>
         </div>
         <div>
-            <img src="/SafeEyes/assets/back.png" width={400} height={400}/>
+            <img src="/SafeEyes/assets/back.png" className="hidden lg:block" width={400} height={400}/>
         </div>
       </div>
 
       <div className="h-screen flex flex-col items-center bg-slate-100">
         <div className="text-4xl h-1/5 mt-10">Что мы предлагаем?</div>
-        <div className="flex h-4/5 items-stretch justify-center align-center space-x-6 px-10 mb-10">
+        <div className="xl:flex h-4/5 items-stretch justify-center align-center space-x-6 px-10 mb-10">
             <div className="flex flex-col shadow-lg h-full justify-evenly items-center whitespace-normal rounded-md px-3 py-2">
                 <div className="w-[350px] h-[350px] mb-10">
                     <img src="/SafeEyes/assets/ppe.png" alt="" className="w-full h-full object-fill rounded-lg" />
