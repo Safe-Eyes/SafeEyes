@@ -16,14 +16,14 @@ const NavBar: FC = () => {
     };
 
     return (
-        <header className="flex items-center p-4 mt-3 mx-5">
+        <header className="flex flex-col lg:flex-row items-center p-4 mt-3 mx-5">
             <Link to="/">
                 <div className="flex flex-col ml-5 justify-center items-center">
                     <img src="/SafeEyes/assets/logo.png" alt="" width={50} height={50}/>
                     <h1 className="black text-3xl mt-2">SafeEyes</h1>
                 </div>
             </Link>
-            <nav className="ml-auto mr-10">
+            <nav className="lg:ml-auto lg:mr-10 mt-10 lg:mt-0">
                 <ul className="flex items-center gap-5">
                     <li>
                         <NavLink
