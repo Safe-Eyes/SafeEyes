@@ -37,7 +37,7 @@ const AboutUs: FC = () => {
                         <img src={staff[index][0]} alt="" className="w-full h-full object-fill rounded-full" />
                     </div>
                     <h3 className="text-center text-2xl mb-2 font-bold">{staff[index][1]}</h3>
-                    <h5 className="text-blue-300 font-bold text-center mb-2">{staff[index][2]}</h5>    
+                    <h5 className="text-blue-300 text-center mb-2">{staff[index][2]}</h5>    
                 </div>
                 <div onClick={increase} className="flex flex-col shadow-lg h-fit justify-center items-center whitespace-normal rounded-md px-3 py-2">
                     <FaArrowRight className='w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]' />    
