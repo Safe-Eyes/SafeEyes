@@ -1,0 +1,5 @@
+yolov5-coco-datasets
+*.avi
+*.mp4
+*.jpg
+training
